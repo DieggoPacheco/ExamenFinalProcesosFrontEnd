@@ -128,7 +128,46 @@ function listar2(){
       `;
       document.getElementById("table").innerHTML = tablaSuperior;
 
-        
+let productos = '';
+
+        for (const producto of response.data) {
+        productos += `
+            <tr>
+            <th scope="row">${producto.id}</th>
+            <td>${producto.title}</td>
+            <td>${producto.price}</td>
+            <td>${producto.category}</td>
+            <td>${producto.description}</td>
+            <td>${producto.image}</td>
+            <td>${producto.rating.rate}</td>
+            <td>${producto.rating.count}</td>
+            <td>
+                <a href="#" onclick="verModificarProducto('${producto.id}')" class="btn btn-outline-warning">
+                <i class="fa-solid fa-user-pen"></i>
+                </a>
+                <a href="#" onclick="verProducto('${producto.id}')" class="btn btn-outline-info">
+                <i class="fa-solid fa-eye"></i>
+                </a>
+            </td>
+            </tr>`;
+        }
+        document.getElementById("listar").innerHTML = productos;
+
+        var elemento = document.querySelector('.btn-outline-success');
+
+        elemento.addEventListener('click', registerForm2);
+
+
+      } else {
+        // Manejar errores de la solicitud
+      }
+    };
+    
+    xhr.onerror = function() {
+      // Manejar errores de conexión
+    };
+    
+    xhr.send();        
 }
 
 
